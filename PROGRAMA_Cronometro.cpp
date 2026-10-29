@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <iomanip>
 using namespace std;
 
 int particionar(int izq, int der, double v[]) {
@@ -78,6 +79,8 @@ int main() {
     double tiempoQuick = chrono::duration<double>(finQuick - inicioQuick).count();
     
 	double tiempopromedio = (tiempoQuick + tiempoShell) / 2.00;
+	
+	cout << fixed << setprecision(8);
     cout << "Tiempo de Ejecucion de Shellsort: " << tiempoShell << " s" << endl;
     cout << "Tiempo de Ejecucion de Quicksort: " << tiempoQuick << " s" << endl;
     cout << "Tiempo de Ejecucion del Testeo: " << tiempopromedio << " s" << endl;
