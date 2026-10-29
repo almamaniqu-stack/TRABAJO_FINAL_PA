@@ -1,8 +1,8 @@
 #include <iostream>
-#include <ctime>
+#include <chrono>
 using namespace std;
 
-int particionar(int izq, int der, int v[]) {
+int particionar(int izq, int der, double v[]) {
     int pvt = v[der];
     int i = izq - 1;
     int aux;
@@ -23,7 +23,7 @@ int particionar(int izq, int der, int v[]) {
     return i + 1;
 }
 
-void quicksort(int izq, int der, int v[]) {
+void quicksort(int izq, int der, double v[]) {
     if (izq >= der) {
         return;
     }
@@ -43,7 +43,7 @@ int main() {
         b[i] = a[i];
     }
 
-    clock_t t0 = clock();
+    auto inicioShell = chrono::steady_clock::now();
     
     for (k = n / 2; k > 0; k /= 2){
         for (i = k; i < n; i++){
@@ -61,9 +61,11 @@ int main() {
 	}
 	cout << endl;
 
-    clock_t t1 = clock();
+    auto finShell = chrono::steady_clock::now();
     cout << "-----------------------------------------\n";
-    clock_t t2 = clock();
+    double tiempoShell = chrono::duration<double>(finShell - inicioShell).count();
+    
+    auto inicioQuick = chrono::steady_clock::now();
 
 	quicksort(0, n - 1, b);
     for (i = 0; i < n; i++) {
@@ -71,15 +73,14 @@ int main() {
     }
     cout << endl;
 
-    clock_t t3 = clock();
+    auto finQuick = chrono::steady_clock::now();
     cout << "-----------------------------------------\n";
+    double tiempoQuick = chrono::duration<double>(finQuick - inicioQuick).count();
     
-    double tiempo1 = double(t1 - t0) / CLOCKS_PER_SEC;
-	double tiempo2 = double(t3 - t2) / CLOCKS_PER_SEC;
-	double tiempopromedio = (tiempo1 + tiempo2) / 2;
-    cout << "Tiempo de ejecución de Shellsort: " << tiempo1 << " s" << endl;
-    cout << "Tiempo de ejecución de Quicksort: " << tiempo2 << " s" << endl;
-    cout << "Tiempo de ejecución del testeo: " << tiempopromedio << " s" << endl;
+	double tiempopromedio = (tiempoQuick + tiempoShell) / 2.00;
+    cout << "Tiempo de Ejecucion de Shellsort: " << tiempoShell << " s" << endl;
+    cout << "Tiempo de Ejecucion de Quicksort: " << tiempoQuick << " s" << endl;
+    cout << "Tiempo de Ejecucion del Testeo: " << tiempopromedio << " s" << endl;
     return 0;
 }
 
