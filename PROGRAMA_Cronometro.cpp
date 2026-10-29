@@ -76,8 +76,10 @@ int main() {
     
     double tiempo1 = double(t1 - t0) / CLOCKS_PER_SEC;
 	double tiempo2 = double(t3 - t2) / CLOCKS_PER_SEC;
+	double tiempopromedio = (tiempo1 + tiempo2) / 2;
     cout << "Tiempo de ejecución de Shellsort: " << tiempo1 << " s" << endl;
     cout << "Tiempo de ejecución de Quicksort: " << tiempo2 << " s" << endl;
+    cout << "Tiempo de ejecución del testeo: " << tiempopromedio << " s" << endl;
     return 0;
 }
 
